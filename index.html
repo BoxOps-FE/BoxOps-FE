@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxOps - Personal Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .geometry-section {
+            background-color: #1affd5; /* neon cyan */
+            color: black;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .science-section {
+            background-color: #00fffb; /* neon magenta */
+            color: black;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .data-entry-section {
+            background-color: #ffcc00; /* yellow */
+            color: black;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 0.8em;
+        }
+        .plus-sign {
+            font-size: 1.5em;
+            color: #00ff00; /* neon green */
+            margin: 0 5px;
+        }
+        .perpendicular-line {
+            display: inline-block;
+            width: 0.5em;
+            height: 2em;
+            background-color: #ffff00; /* neon yellow */
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header>
+            <h1>BoxOps</h1>
+            <p>Hub for FE geometry, science, observations, citations and data points.</p>
+        </header>
+        
+        <section class="geometry-section">
+            <h2>Geometry</h2>
+            <p>Explore where every angle tells a story.</p>
+            <p>Citations and references to geometric principles and discoveries await your curiosity.</p>
+        </section>
+        
+        <section class="science-section">
+            <h2>Science</h2>
+            <p>Dive into the world of exploration, where data points converge to reveal deeper truths.</p>
+            <p>Stay updated with the latest observations that shape our understanding.</p>
+        </section>
+        
+         <!-- Data Entry Section -->
+         <section class="data-entry-section">
+            <h2>Data Entry</h2>
+            <form id="dataForm">
+                <label for="observation">Observation:</label><br>
+                <input type="text" id="observation" name="observation" required><br><br>
+                
+                <label for="citation">Citation:</label><br>
+                <input type="text" id="citation" name="citation"><br><br>
+                
+                <label for="dataPoint">Data Point:</label><br>
+                <input type="text" id="dataPoint" name="dataPoint"><br><br> <!-- Changed type to text -->
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        
+        <!-- View Data Section -->
+        <section class="view-data-section">
+            <h2>View Entered Data</h2>
+            <table id="dataDisplay">
+                <thead>
+                    <tr>
+                        <th>Observation</th>
+                        <th>Citation</th>
+                        <th>Data Point</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Footer Section -->
+        <footer>
+            <p>Made with <span class="plus-sign">+</span> and <span class="perpendicular-line"></span> by BoxOps</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('dataForm');
+            const dataDisplay = document.querySelector('#dataDisplay tbody');
+        
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+        
+                // Retrieve form values
+                const observation = document.getElementById('observation').value;
+                const citation = document.getElementById('citation').value;
+                const dataPoint = document.getElementById('dataPoint').value;
+        
+                // Create table row for the new data
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${observation}</td>
+                    <td>${citation}</td>
+                    <td>${dataPoint}</td>
+                `;
+        
+                // Append the row to the table
+                dataDisplay.appendChild(row);
+        
+                // Optionally, clear form fields after submission
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
