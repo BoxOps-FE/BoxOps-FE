@@ -60,6 +60,21 @@
             background-color: #ffff00; /* neon yellow */
             margin: 0 10px;
         }
+        .observation {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .observation img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            display: block;
+        }
+        .observation iframe {
+            width: 100%;
+            height: 300px; /* Adjust height as needed */
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -71,8 +86,19 @@
         
         <section class="geometry-section">
             <h2>Geometry</h2>
-            <p>Explore where every angle tells a story.</p>
-            <p>Citations and references to geometric principles and discoveries await your curiosity.</p>
+            <div class="observation">
+                <h3>New Black Swan Observation</h3>
+                <p>Citation: bmlsb69 yt <a href="https://youtu.be/WXNjki9ohWA?si=LNLhBavPdiDrsWcJ">https://youtu.be/WXNjki9ohWA?si=LNLhBavPdiDrsWcJ</a></p>
+                <p>Data Point: 1.5 Observer Height, 31.82 mile horizon, 613 FT missing curve of 85 FT island, horizon 2000% beyond globe geometric limitation of 1.5 miles, requires a globe radius of 1.8 MILLION!</p>
+                <img src="new_black_swan.jpg" alt="New Black Swan Image">
+            </div>
+
+            <div class="observation">
+                <h3>Black Swan Canada Observation</h3>
+                <p>Citation: Heath Camody <a href="https://youtu.be/MVKmLpV5Ltc?si=e5AEO28gES6fQK_f">https://youtu.be/MVKmLpV5Ltc?si=e5AEO28gES6fQK_f</a></p>
+                <p>Data Point: 3 INCH observer height, 13.8 mile horizon, Horizon 2200% beyond globe 0.6 mile geometric limitation</p>
+                <img src="black_swan_canada.gif" alt="Black Swan Canada GIF">
+            </div>
         </section>
         
         <section class="science-section">
@@ -81,8 +107,8 @@
             <p>Stay updated with the latest observations that shape our understanding.</p>
         </section>
         
-         <!-- Data Entry Section -->
-         <section class="data-entry-section">
+        <!-- Data Entry Section -->
+        <section class="data-entry-section">
             <h2>Data Entry</h2>
             <form id="dataForm">
                 <label for="observation">Observation:</label><br>
@@ -98,24 +124,6 @@
             </form>
         </section>
         
-        <!-- View Data Section -->
-        <section class="view-data-section">
-            <h2>View Entered Data</h2>
-            <table id="dataDisplay">
-                <thead>
-                    <tr>
-                        <th>Observation</th>
-                        <th>Citation</th>
-                        <th>Data Point</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data rows will be dynamically added here -->
-                </tbody>
-            </table>
-        </section>
-        
-        <!-- Footer Section -->
         <footer>
             <p>Made with <span class="plus-sign">+</span> and <span class="perpendicular-line"></span> by BoxOps</p>
         </footer>
@@ -125,7 +133,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('dataForm');
-            const dataDisplay = document.querySelector('#dataDisplay tbody');
+            const dataDisplay = document.getElementById('dataDisplay');
         
             form.addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission
@@ -135,20 +143,38 @@
                 const citation = document.getElementById('citation').value;
                 const dataPoint = document.getElementById('dataPoint').value;
         
-                // Create table row for the new data
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${observation}</td>
-                    <td>${citation}</td>
-                    <td>${dataPoint}</td>
-                `;
+                // Store form data in localStorage (optional, you can remove this if not needed)
+                localStorage.setItem('observation', observation);
+                localStorage.setItem('citation', citation);
+                localStorage.setItem('dataPoint', dataPoint);
         
-                // Append the row to the table
-                dataDisplay.appendChild(row);
+                // Show a confirmation message to the user
+                alert('Form submitted successfully!');
         
-                // Optionally, clear form fields after submission
+                // Clear form fields
                 form.reset();
+
+                // Update displayed data
+                updateDataDisplay();
             });
+
+            // Function to update displayed data
+            function updateDataDisplay() {
+                const storedObservation = localStorage.getItem('observation');
+                const storedCitation = localStorage.getItem('citation');
+                const storedDataPoint = localStorage.getItem('dataPoint');
+
+                // Create a new list item for each submission
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>Observation:</strong> ${storedObservation}<br>
+                    <strong>Citation:</strong> ${storedCitation}<br>
+                    <strong>Data Point:</strong> ${storedDataPoint}<br><br>
+                `;
+
+                // Append the new list item to the list
+                dataDisplay.appendChild(listItem);
+            }
         });
     </script>
 </body>
